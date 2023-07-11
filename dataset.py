@@ -33,7 +33,7 @@ class Dataset(object):
         self.validset = []
         self.testset = []
 
-    def load_train_and_valid_dataset(self,file='train.txt'):
+    def _load_train_and_valid_dataset(self,file='train.txt'):
         dataset = []
         split = self.validset_divide
         try:
@@ -42,9 +42,16 @@ class Dataset(object):
                 for line in f:
                     data = line
                     id = data.split(',')[0]
-                    tag = data.split(',')[1]
+                    tag = data.split(',')[1].strip('\n')
+                    if tag == "positive":
+                        tag = 2
+                    elif tag == "negative":
+                        tag = 0
+                    else:
+                        tag = 1
                     textdata,imgdata = read_one(id)
                     one_piece = {'text':textdata,'img':imgdata,'tag':tag}
+                    #print(one_piece)
                     dataset.append(one_piece)
         except FileNotFoundError:
             print(f"File {file} not found.")
@@ -52,12 +59,13 @@ class Dataset(object):
         
         if split:
             val_length = int(len(dataset)*split)
-            val_data = random.sample(dataset,val_length)
-            train_data = [x for x in data if x not in val_data]
+            #print("validset length:",val_length)
+            val_data = dataset[-1*val_length:]
+            train_data = dataset[:-1*val_length]
             self.validset = val_data
             self.trainset = train_data
 
-    def load_test_dataset(self,file='test_without_label.txt'):
+    def _load_test_dataset(self,file='test_without_label.txt'):
         testdata = []
         try:
             with open(file,encoding='utf-8') as f:
@@ -74,4 +82,22 @@ class Dataset(object):
         self.testset = testdata
 
 if __name__ == "__main__":
+    config = {
+        "max_input_len":50,
+        "pretrained_model_name":"bert-base-cased",
+        "model":"vistanet",
+        "validset_divide":0.2,
+        "device":"cuda:0",
+        'resume_training':False,
+        'resume':False,
+        'train_batch_size':4,
+        'test_batch_size':1,
+        'max_len':50,
+        "shuffle":True,
+    }
+    dataset = Dataset(config)
+    dataset._load_train_and_valid_dataset()
+    dataset._load_test_dataset()
+    #print(dataset.trainset)
+
     pass
