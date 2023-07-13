@@ -38,7 +38,7 @@ Nvidia RTX2060显卡 5.0GB显存
 同时需要安装Cuda11.3版本以适配本项目使用的GPU计算，如果无法使用GPU计算，则可以选择不安装，使用CPU以较慢速度计算。<br>
 如在安装依赖环境方面存在问题如`torch`无法使用GPU进行计算，可以查看我的个人博客获取帮助。[^1]
 ## 使用方法
-请在`quickstart.py`文件中输入你希望训练的模型名称，并且修改`config_settings`文件夹下对应的模型参数文件，然后运行`quickstart.py`即可。<br>
+首先请建立一个`data`文件夹存放您的数据，配置好环境后，请在`quickstart.py`文件中输入你希望训练的模型名称，并且修改`config_settings`文件夹下对应的模型参数文件，然后运行`quickstart.py`即可。<br>
 已经提供了四个可运行的模型，分别是`vistanet`,`reducenet`,`textnet`,`vggnet`<br>
 **注意**：请尽量不要打乱文件的结构，这会影响一些参数的运行。
 ## 模型介绍
