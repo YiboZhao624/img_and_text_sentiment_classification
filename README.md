@@ -34,7 +34,7 @@
 ## 实验环境
 Nvidia RTX2060显卡 5.0GB显存
 ## 依赖环境安装
-可以通过pip install -r requirement.txt安装所有依赖的非python标准库<br>
+可以通过`pip install -r requirement.txt`安装所有依赖的非python标准库<br>
 同时需要安装Cuda11.3版本以适配本项目使用的GPU计算，如果无法使用GPU计算，则可以选择不安装，使用CPU以较慢速度计算。<br>
 如在安装依赖环境方面存在问题如`torch`无法使用GPU进行计算，可以查看我的个人博客获取帮助。[^1]
 ## 使用方法
