@@ -1,7 +1,3 @@
-# -*- encoding: utf-8 -*-
-# @Author: Yunshi Lan
-# @Time: 2023/02/10 14:28
-# @File: abstract_dataloader.py
 from typing import List
 import random
 import math
