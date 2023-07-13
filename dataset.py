@@ -27,8 +27,7 @@ class Dataset(object):
         self.model = config["model"]
         self.validset_divide = config["validset_divide"]
         self.device = config["device"]
-        self.resume_training = config['resume_training'] if config['resume_training'] else config['resume']
-
+        self.resume_training = config['resume_training']
         self.trainset = []
         self.validset = []
         self.testset = []
@@ -50,7 +49,7 @@ class Dataset(object):
                     else:
                         tag = 1
                     textdata,imgdata = read_one(id)
-                    one_piece = {'text':textdata,'img':imgdata,'tag':tag}
+                    one_piece = {'id':id,'text':textdata,'img':imgdata,'tag':tag}
                     #print(one_piece)
                     dataset.append(one_piece)
         except FileNotFoundError:
@@ -60,6 +59,7 @@ class Dataset(object):
         if split:
             val_length = int(len(dataset)*split)
             #print("validset length:",val_length)
+            random.shuffle(dataset)
             val_data = dataset[-1*val_length:]
             train_data = dataset[:-1*val_length]
             self.validset = val_data
@@ -74,7 +74,7 @@ class Dataset(object):
                     data = line
                     id = data.split(',')[0]
                     textdata,imgdata = read_one(id)
-                    one_piece = {'text':textdata,'img':imgdata,'tag':None}
+                    one_piece = {'id':id,'text':textdata,'img':imgdata,'tag':None}
                     testdata.append(one_piece)
         except FileNotFoundError:
             print(f"File {file} not found.")
