@@ -50,7 +50,7 @@ Nvidia RTX2060显卡 5.0GB显存
 3. `textnet`：消融实验使用，仅仅使用BERT预训练模型提取了语义，然后直接将其`flatten`后通过全连接层输出。
 4. `vggnet`：消融实验使用，仅仅使用了预训练的VGG模型提取图像特征进行分类。
 ## 作者
-赵艺博 10203330408@stu.ecnu.edu.cn<br>
+赵艺博 51275903033@stu.ecnu.edu.cn<br>
 也可联系 ZhaoYibo624@Gmail.com
 
 [^1]:https://flowus.cn/liltry/28a814b4-9468-44f7-9602-b8f536eed439
